@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 # Test results (generated files - safe to delete)
 test-results/
