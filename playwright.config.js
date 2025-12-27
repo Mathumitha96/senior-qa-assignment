@@ -6,11 +6,7 @@ module.exports = defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: [
-    ['html'],
-    ['allure-playwright', { outputFolder: 'allure-results' }],
-    ['list']
-  ],
+  reporter: [['html'], ['allure-playwright', { outputFolder: 'allure-results' }], ['list']],
   use: {
     baseURL: 'https://demowebshop.tricentis.com',
     headless: true,
@@ -25,4 +21,3 @@ module.exports = defineConfig({
     },
   ],
 });
-

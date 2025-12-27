@@ -34,16 +34,16 @@ npm run allure:report       # View Allure report (run tests first)
 
 ## Available Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm run setup` | Install dependencies and browsers |
-| `npm test` | Run all tests |
-| `npm run test:ui` | Run tests with Playwright UI |
-| `npm run report` | View Playwright HTML report |
-| `npm run allure:report` | Generate and view Allure report |
-| `npm run clean` | Clean generated reports |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check code formatting |
+| Command                 | Description                       |
+| ----------------------- | --------------------------------- |
+| `npm run setup`         | Install dependencies and browsers |
+| `npm test`              | Run all tests                     |
+| `npm run test:ui`       | Run tests with Playwright UI      |
+| `npm run report`        | View Playwright HTML report       |
+| `npm run allure:report` | Generate and view Allure report   |
+| `npm run clean`         | Clean generated reports           |
+| `npm run format`        | Format code with Prettier         |
+| `npm run format:check`  | Check code formatting             |
 
 ## Project Structure
 

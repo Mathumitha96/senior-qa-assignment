@@ -25,4 +25,3 @@ class CategoryPage extends BasePage {
 }
 
 module.exports = { CategoryPage };
-
