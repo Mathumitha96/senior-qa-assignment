@@ -1,0 +1,34 @@
+{
+  "website": {
+    "url": "https://demowebshop.tricentis.com/",
+    "title": "Demo Web Shop"
+  },
+  "categories": [
+    {
+      "name": "Books",
+      "subcategory": null,
+      "addMethod": "direct"
+    },
+    {
+      "name": "Computers",
+      "subcategory": "Show products in category Desktops",
+      "addMethod": "byImage",
+      "imageTitle": "Show details for Build your own cheap computer",
+      "buttonId": "add-to-cart-button-72"
+    }
+  ],
+  "searchProducts": [
+    {
+      "searchTerm": "book",
+      "quantity": 1
+    },
+    {
+      "searchTerm": "smartphone",
+      "quantity": 1
+    }
+  ],
+  "cart": {
+    "updateQuantity": 2
+  }
+}
+
