@@ -8,8 +8,8 @@
     "report": "npx playwright show-report",
     "allure:report": "rm -rf allure-report && npx allure generate allure-results -o allure-report && npx allure open allure-report",
     "clean": "rm -rf test-results playwright-report allure-report",
-    "format": "prettier --write \"**/*.{js,json,md}\"",
-    "format:check": "prettier --check \"**/*.{js,json,md}\""
+    "format": "prettier --write \"./**/*.{js,json,md}\"",
+    "format:check": "prettier --check \"./**/*.{js,json,md}\""
   },
   "devDependencies": {
     "@playwright/test": "^1.47.0",
