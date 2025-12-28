@@ -10,6 +10,7 @@ Playwright JavaScript automation framework for Demo Web Shop with Page Object Mo
 ## Installation
 
 1. **Navigate to this directory:**
+
    ```bash
    cd playwright-automation
    ```
