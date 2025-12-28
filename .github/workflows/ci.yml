@@ -57,7 +57,6 @@ jobs:
           playwright-automation/test-results/**/*.png
           playwright-automation/test-results/**/*.webm
           playwright-automation/test-results/**/*.zip
-          playwright-automation/test-results/**/*.json
         retention-days: 7
         if-no-files-found: ignore
         
