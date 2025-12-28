@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Manual Test Cases - Demo Web Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .test-id {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        .test-title {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .description {
+            font-style: italic;
+            color: #555;
+        }
+        ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .test-data {
+            background-color: #fff3cd;
+            padding: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        .positive {
+            background-color: #d4edda;
+            padding: 8px;
+            border-left: 4px solid #28a745;
+            margin: 10px 0;
+        }
+        .negative {
+            background-color: #f8d7da;
+            padding: 8px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0;
+        }
+        .expected-result {
+            background-color: #e7f3ff;
+            padding: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .scenario-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manual Test Cases - Demo Web Shop</h1>
+    <p><strong>Website:</strong> https://demowebshop.tricentis.com</p>
+    <p><strong>Total Test Cases:</strong> 5</p>
+    
+    <h2>TC-001: User Registration</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">TC-001</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">User Registration</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that a new user can successfully register and create an account on the Demo Web Shop</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com</li>
+                    <li>Verify homepage loads successfully</li>
+                    <li>Click on 'Register' link located in the top menu bar</li>
+                    <li>Verify registration page loads with all required fields</li>
+                    <li>Fill in the registration form with test data (see Test Data section)</li>
+                    <li>Verify all fields are filled correctly</li>
+                    <li>Click 'Register' button</li>
+                    <li>Wait for page to process the registration</li>
+                    <li>Observe system response</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>First Name:</strong> John<br>
+                    <strong>Last Name:</strong> Doe<br>
+                    <strong>Email:</strong> john.doe.test@example.com (use unique email)<br>
+                    <strong>Password:</strong> Test123!<br>
+                    <strong>Confirm Password:</strong> Test123!
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Invalid Email:</strong> Email: invalid-email (no @ symbol)<br>
+                    <strong>Test Case B - Weak Password:</strong> Password: 123; Confirm Password: 123<br>
+                    <strong>Test Case C - Mismatched Passwords:</strong> Password: Test123!; Confirm Password: Test456!<br>
+                    <strong>Test Case D - Duplicate Email:</strong> Email: existing.user@example.com (already registered)<br>
+                    <strong>Test Case E - Missing Required Fields:</strong> Leave First Name or Last Name blank
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Registration page loads successfully</li>
+                        <li>All form fields accept input correctly</li>
+                        <li>User account is successfully created</li>
+                        <li>Success message 'Your registration completed' is displayed</li>
+                        <li>User is automatically logged in</li>
+                        <li>User is redirected to homepage</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Error message displayed for invalid email format<br>
+                    <strong>Test Case B:</strong> Error message displayed for weak password<br>
+                    <strong>Test Case C:</strong> Error message displayed for password mismatch<br>
+                    <strong>Test Case D:</strong> Error message displayed for duplicate email<br>
+                    <strong>Test Case E:</strong> Error message displayed for missing required fields
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>TC-002: Search for Products</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">TC-002</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Search for Products</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that users can search for products using the search functionality and find relevant results</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com</li>
+                    <li>Locate the search box in the header/navigation area</li>
+                    <li>Verify search box is visible and accessible</li>
+                    <li>Enter search term from Test Data section</li>
+                    <li>Click 'Search' button (or press Enter key)</li>
+                    <li>Wait for search results page to load</li>
+                    <li>Review the search results displayed</li>
+                    <li>Verify search term is displayed on the results page</li>
+                    <li>Click on one of the search result products to view details</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Search Term:</strong> 'book' (or 'computer', 'smartphone', 'laptop')
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Empty Search:</strong> Leave search field blank and click Search<br>
+                    <strong>Test Case B - Special Characters:</strong> Search Term: '@#$%^&*()'<br>
+                    <strong>Test Case C - Very Long Search Term:</strong> Search Term: 'a' repeated 500 times<br>
+                    <strong>Test Case D - Non-existent Product:</strong> Search Term: 'xyzabc123nonexistent'<br>
+                    <strong>Test Case E - SQL Injection Attempt:</strong> Search Term: 'book' OR '1'='1'
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Search box is visible and functional</li>
+                        <li>Search results page loads successfully</li>
+                        <li>Relevant products matching search term are displayed</li>
+                        <li>Products show name, image, price, and 'Add to cart' button</li>
+                        <li>User can click products to view details</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Error message or no results message displayed<br>
+                    <strong>Test Case B:</strong> Special characters handled safely, no errors<br>
+                    <strong>Test Case C:</strong> System handles long input gracefully<br>
+                    <strong>Test Case D:</strong> 'No products found' message displayed<br>
+                    <strong>Test Case E:</strong> SQL injection blocked, safe error message shown
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>TC-003: Add Product to Cart</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">TC-003</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Add Product to Cart</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that users can successfully add products to the shopping cart from product category pages and product detail pages</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com</li>
+                    <li>Browse to a product category by clicking on category from main navigation menu</li>
+                    <li>Verify category page loads and displays products</li>
+                    <li>Select product based on Test Data scenario</li>
+                    <li>Option A - Add from category page: Click 'Add to cart' button directly OR Option B - Add from product details: Click product name/image to view details page then click 'Add to cart'</li>
+                    <li>Verify 'Add to cart' button is visible and enabled</li>
+                    <li>Click 'Add to cart' button</li>
+                    <li>Wait for confirmation notification</li>
+                    <li>Verify notification message</li>
+                    <li>Click shopping cart icon to view cart</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Product Category:</strong> Books (or Computers, Electronics)<br>
+                    <strong>Product:</strong> Any available in-stock product<br>
+                    <strong>Quantity:</strong> 1
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Out of Stock Product:</strong> Select product marked as 'Out of stock'<br>
+                    <strong>Test Case B - Invalid Quantity:</strong> Enter quantity as 0 or negative number<br>
+                    <strong>Test Case C - Very Large Quantity:</strong> Enter quantity as 99999<br>
+                    <strong>Test Case D - Disabled Product:</strong> Select product with 'Add to cart' button disabled<br>
+                    <strong>Test Case E - Expired Product:</strong> Select product that is no longer available
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Category page loads with products displayed</li>
+                        <li>Product details page displays all information correctly</li>
+                        <li>'Add to cart' button is visible and clickable</li>
+                        <li>Success notification appears: 'The product has been added to your shopping cart'</li>
+                        <li>Shopping cart icon shows updated item count</li>
+                        <li>Cart page displays product with correct details and price</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Error message: 'Product is out of stock' or button disabled<br>
+                    <strong>Test Case B:</strong> Error message for invalid quantity or quantity reset to 1<br>
+                    <strong>Test Case C:</strong> Error message for quantity limit exceeded or system caps at maximum<br>
+                    <strong>Test Case D:</strong> Button remains disabled, no action possible<br>
+                    <strong>Test Case E:</strong> Error message: 'Product no longer available' or redirect to product list
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>TC-004: Price Calculation Verification</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">TC-004</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Price Calculation Verification</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that price calculations are accurate when multiple products with different quantities are in the shopping cart, including subtotals and total cart value</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Add first product to cart with test data from Test Data section</li>
+                    <li>Navigate back and add a second different product to cart</li>
+                    <li>Navigate to shopping cart page</li>
+                    <li>Verify both products are displayed</li>
+                    <li>Note unit prices of both products</li>
+                    <li>Update quantities based on Test Data scenario</li>
+                    <li>Click 'Update shopping cart' button</li>
+                    <li>Wait for cart to refresh</li>
+                    <li>Verify calculations for each product</li>
+                    <li>Verify total cart value</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Product 1:</strong> Unit Price $10.00, Quantity 2, Expected Subtotal $20.00<br>
+                    <strong>Product 2:</strong> Unit Price $15.00, Quantity 1, Expected Subtotal $15.00<br>
+                    <strong>Expected Cart Total:</strong> $35.00
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Zero Quantity:</strong> Set quantity to 0 for one product<br>
+                    <strong>Test Case B - Negative Quantity:</strong> Enter -5 as quantity<br>
+                    <strong>Test Case C - Decimal Quantity:</strong> Enter 2.5 as quantity<br>
+                    <strong>Test Case D - Very Large Quantity:</strong> Enter 10000 as quantity<br>
+                    <strong>Test Case E - Decimal Prices:</strong> Product with price $9.99, quantity 3, verify calculation $29.97
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Cart displays all products in table format</li>
+                        <li>Quantity input field accepts and updates correctly</li>
+                        <li>First product subtotal: $10.00 × 2 = $20.00 (correct)</li>
+                        <li>Second product subtotal: $15.00 × 1 = $15.00 (correct)</li>
+                        <li>Cart Total: $35.00 (sum of all subtotals)</li>
+                        <li>All calculations mathematically accurate</li>
+                        <li>Currency format displayed correctly</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Product removed from cart or error message displayed<br>
+                    <strong>Test Case B:</strong> Error message displayed or quantity reset to 1<br>
+                    <strong>Test Case C:</strong> Error message for invalid quantity or decimal rounded/truncated<br>
+                    <strong>Test Case D:</strong> Error message for quantity limit or system caps at maximum allowed<br>
+                    <strong>Test Case E:</strong> Decimal calculation accurate: $9.99 × 3 = $29.97 (no rounding errors)
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>TC-005: Complete Checkout and Place Order</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">TC-005</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Complete Checkout and Place Order</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that a logged-in user can complete the entire checkout process from cart to order confirmation, including billing address, shipping, payment method selection, and order placement</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com and ensure logged in</li>
+                    <li>Verify user is logged in</li>
+                    <li>Add at least one product to cart if empty</li>
+                    <li>Navigate to shopping cart page</li>
+                    <li>Verify cart contents are correct</li>
+                    <li>Click 'Checkout' button</li>
+                    <li>Fill in billing address using Test Data</li>
+                    <li>Verify 'Ship to the same address' checkbox</li>
+                    <li>Click 'Continue' to shipping method</li>
+                    <li>Select shipping method</li>
+                    <li>Click 'Continue' to payment method</li>
+                    <li>Select payment method</li>
+                    <li>Click 'Continue' through payment information</li>
+                    <li>Review order summary</li>
+                    <li>Click 'Confirm' or 'Place Order' button</li>
+                    <li>Verify order confirmation page</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>First Name:</strong> John<br>
+                    <strong>Last Name:</strong> Doe<br>
+                    <strong>Email:</strong> john.doe@example.com<br>
+                    <strong>Country:</strong> United States<br>
+                    <strong>State:</strong> California<br>
+                    <strong>City:</strong> Los Angeles<br>
+                    <strong>Address:</strong> 123 Main Street<br>
+                    <strong>Zip:</strong> 90001<br>
+                    <strong>Phone:</strong> 555-123-4567<br>
+                    <strong>Shipping Method:</strong> Ground<br>
+                    <strong>Payment Method:</strong> Cash On Delivery
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Invalid Email:</strong> Email: invalid-email-format<br>
+                    <strong>Test Case B - Missing Required Fields:</strong> Leave First Name or Zip Code blank<br>
+                    <strong>Test Case C - Invalid Zip Code:</strong> Zip: 'ABC123' (non-numeric)<br>
+                    <strong>Test Case D - Invalid Phone:</strong> Phone: '123' (too short)<br>
+                    <strong>Test Case E - Invalid Address:</strong> Address: Only special characters '@#$%'<br>
+                    <strong>Test Case F - Empty Cart:</strong> Attempt checkout with empty cart
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Checkout page loads with all sections visible</li>
+                        <li>All billing address fields accept input correctly</li>
+                        <li>Shipping and payment methods can be selected</li>
+                        <li>Order summary displays correctly with all details</li>
+                        <li>Order is processed successfully</li>
+                        <li>Order confirmation page displayed with order number</li>
+                        <li>Order appears in order history</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Error message for invalid email format<br>
+                    <strong>Test Case B:</strong> Error message for missing required fields, cannot proceed<br>
+                    <strong>Test Case C:</strong> Error message for invalid zip code format<br>
+                    <strong>Test Case D:</strong> Error message for invalid phone number<br>
+                    <strong>Test Case E:</strong> Error message for invalid address format<br>
+                    <strong>Test Case F:</strong> Error message: 'Your cart is empty' or redirect to cart page
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

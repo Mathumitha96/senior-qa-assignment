@@ -19,17 +19,22 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
+        cache-dependency-path: playwright-automation/package-lock.json
         
     - name: Install dependencies
+      working-directory: ./playwright-automation
       run: npm ci
       
     - name: Install Playwright browsers
+      working-directory: ./playwright-automation
       run: npx playwright install --with-deps
       
     - name: Format check
+      working-directory: ./playwright-automation
       run: npm run format:check
       
     - name: Run tests
+      working-directory: ./playwright-automation
       run: npm test
       
     - name: Upload HTML report
@@ -38,7 +43,7 @@ jobs:
       continue-on-error: true
       with:
         name: playwright-html-report
-        path: playwright-report/
+        path: playwright-automation/playwright-report/
         retention-days: 7
         if-no-files-found: ignore
         
@@ -49,10 +54,10 @@ jobs:
       with:
         name: test-results
         path: |
-          test-results/**/*.png
-          test-results/**/*.webm
-          test-results/**/*.zip
-          test-results/**/*.json
+          playwright-automation/test-results/**/*.png
+          playwright-automation/test-results/**/*.webm
+          playwright-automation/test-results/**/*.zip
+          playwright-automation/test-results/**/*.json
         retention-days: 7
         if-no-files-found: ignore
         
@@ -62,7 +67,7 @@ jobs:
       continue-on-error: true
       with:
         name: allure-results
-        path: allure-results/
+        path: playwright-automation/allure-results/
         retention-days: 7
         if-no-files-found: ignore
 

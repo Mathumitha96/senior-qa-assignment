@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Security Test Cases - Demo Web Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #c0392b;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #8e44ad;
+            margin-top: 30px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        th {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .test-id {
+            font-weight: bold;
+            color: #c0392b;
+        }
+        .test-title {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .description {
+            font-style: italic;
+            color: #555;
+        }
+        ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .test-data {
+            background-color: #fff3cd;
+            padding: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        .positive {
+            background-color: #d4edda;
+            padding: 8px;
+            border-left: 4px solid #28a745;
+            margin: 10px 0;
+        }
+        .negative {
+            background-color: #f8d7da;
+            padding: 8px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0;
+        }
+        .expected-result {
+            background-color: #e7f3ff;
+            padding: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .scenario-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Security Test Cases - Demo Web Shop</h1>
+    <p><strong>Website:</strong> https://demowebshop.tricentis.com</p>
+    <p><strong>Total Security Test Cases:</strong> 7</p>
+    
+    <h2>SEC-001: SQL Injection in Login Form</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">SEC-001</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">SQL Injection in Login Form</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that the login form is protected against SQL injection attacks</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com</li>
+                    <li>Click on 'Log in' link</li>
+                    <li>Enter test data from Test Data section in Email and Password fields</li>
+                    <li>Click 'Log in' button</li>
+                    <li>Observe the system response</li>
+                    <li>Check browser console and network tab for errors</li>
+                    <li>Verify if unauthorized access is granted</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Email:</strong> valid.user@example.com<br>
+                    <strong>Password:</strong> ValidPassword123! (should login successfully)
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Basic SQL Injection:</strong> Email: admin' OR '1'='1; Password: ' OR '1'='1<br>
+                    <strong>Test Case B - Union Attack:</strong> Email: admin' UNION SELECT * FROM users--; Password: any<br>
+                    <strong>Test Case C - Comment Attack:</strong> Email: admin'--; Password: any<br>
+                    <strong>Test Case D - Drop Table Attack:</strong> Email: admin'; DROP TABLE users--; Password: any
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>User successfully logs in with valid credentials</li>
+                        <li>Redirected to homepage or dashboard</li>
+                        <li>User session established</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Login fails with error: 'Login was unsuccessful', No unauthorized access, No database errors exposed<br>
+                    <strong>Test Case B:</strong> Attack blocked, generic error message, System remains stable<br>
+                    <strong>Test Case C:</strong> Attack blocked, login fails, No SQL errors in response<br>
+                    <strong>Test Case D:</strong> Attack blocked, system protected, Database remains intact, No data loss
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>SEC-002: Cross-Site Scripting (XSS) in Search Field</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">SEC-002</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Cross-Site Scripting (XSS) in Search Field</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that the search functionality is protected against XSS (Cross-Site Scripting) attacks</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com</li>
+                    <li>Locate the search box in the header</li>
+                    <li>Enter test data from Test Data section in search field</li>
+                    <li>Click 'Search' button or press Enter</li>
+                    <li>Observe the search results page</li>
+                    <li>Check if script executes (alert popup appears)</li>
+                    <li>Verify how search term is displayed</li>
+                    <li>Check browser console for errors</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Search Term:</strong> 'book' (normal search, should return results)
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Script Tag:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
+                    <strong>Test Case B - Image Tag:</strong> &lt;img src=x onerror=alert('XSS')&gt;<br>
+                    <strong>Test Case C - SVG Tag:</strong> &lt;svg onload=alert('XSS')&gt;<br>
+                    <strong>Test Case D - JavaScript Protocol:</strong> javascript:alert('XSS')<br>
+                    <strong>Test Case E - HTML Entities:</strong> &amp;lt;script&amp;gt;alert('XSS')&amp;lt;/script&amp;gt;
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Search results page loads successfully</li>
+                        <li>Relevant products displayed</li>
+                        <li>Search term displayed as plain text</li>
+                        <li>No script execution</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Script does NOT execute, No alert popup, Search term HTML encoded<br>
+                    <strong>Test Case B:</strong> Image tag does NOT execute, No alert popup, Safe rendering<br>
+                    <strong>Test Case C:</strong> SVG tag does NOT execute, No alert popup, Input sanitized<br>
+                    <strong>Test Case D:</strong> JavaScript protocol blocked, No script execution, Safe handling<br>
+                    <strong>Test Case E:</strong> HTML entities properly encoded, No script execution, Safe display
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>SEC-003: Authentication Bypass Attempt</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">SEC-003</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Authentication Bypass Attempt</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that the system prevents unauthorized access attempts and authentication bypass</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com</li>
+                    <li>Verify user is not logged in</li>
+                    <li>Attempt to access protected pages directly via URL using Test Data</li>
+                    <li>Observe system response for each attempt</li>
+                    <li>Check if pages are accessible without authentication</li>
+                    <li>Verify redirect behavior</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    After valid login, access protected URLs: /customer/info, /order/history (should be accessible when authenticated)
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Direct URL Access:</strong> Try /customer/info without login<br>
+                    <strong>Test Case B - URL Manipulation:</strong> Try /customer/info?user=admin<br>
+                    <strong>Test Case C - Parameter Injection:</strong> Try /order/history?id=1' OR '1'='1<br>
+                    <strong>Test Case D - Directory Traversal:</strong> Try /customer/../admin/<br>
+                    <strong>Test Case E - Session Hijacking:</strong> Use expired/invalid session token
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Protected pages accessible after valid login</li>
+                        <li>User data displayed correctly</li>
+                        <li>All features functional</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Redirected to login page, Error message: 'Please sign in', No data exposed<br>
+                    <strong>Test Case B:</strong> URL manipulation blocked, Redirected to login, No unauthorized access<br>
+                    <strong>Test Case C:</strong> Parameter injection blocked, Safe error handling, No SQL execution<br>
+                    <strong>Test Case D:</strong> Directory traversal blocked, Access denied, Safe redirect<br>
+                    <strong>Test Case E:</strong> Invalid session rejected, Redirected to login, Session validation enforced
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>SEC-004: Password Security and Validation</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">SEC-004</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Password Security and Validation</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that the system enforces strong password policies and validates password security</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com/register</li>
+                    <li>Fill in registration form with valid data except password</li>
+                    <li>Enter password from Test Data section</li>
+                    <li>Click 'Register' button</li>
+                    <li>Observe system response</li>
+                    <li>Verify error messages or success</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Strong Password:</strong> Test123!@# (meets all requirements: uppercase, lowercase, number, special char, min length)
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Weak Password:</strong> '123' or 'password'<br>
+                    <strong>Test Case B - Short Password:</strong> 'Ab1' (less than minimum)<br>
+                    <strong>Test Case C - No Uppercase:</strong> 'test123!@#'<br>
+                    <strong>Test Case D - No Lowercase:</strong> 'TEST123!@#'<br>
+                    <strong>Test Case E - No Number:</strong> 'TestPassword!@#'<br>
+                    <strong>Test Case F - No Special Character:</strong> 'Test1234'<br>
+                    <strong>Test Case G - Common Password:</strong> 'Password123'
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Password accepted</li>
+                        <li>Registration succeeds</li>
+                        <li>User account created</li>
+                        <li>Success message displayed</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Error: 'Password is too weak', Registration blocked<br>
+                    <strong>Test Case B:</strong> Error: 'Password must be at least X characters', Registration blocked<br>
+                    <strong>Test Case C:</strong> Error: 'Password must contain uppercase letter', Registration blocked<br>
+                    <strong>Test Case D:</strong> Error: 'Password must contain lowercase letter', Registration blocked<br>
+                    <strong>Test Case E:</strong> Error: 'Password must contain a number', Registration blocked<br>
+                    <strong>Test Case F:</strong> Error: 'Password must contain special character', Registration blocked<br>
+                    <strong>Test Case G:</strong> Error: 'Password is too common', Registration blocked
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>SEC-005: Session Management and Timeout</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">SEC-005</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Session Management and Timeout</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that user sessions are properly managed and timeout after inactivity</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com and log in</li>
+                    <li>Verify user is logged in</li>
+                    <li>Note the current time</li>
+                    <li>Perform actions based on Test Data scenario</li>
+                    <li>Observe system response</li>
+                    <li>Verify session status</li>
+                    <li>Check if user is logged out</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Active Session:</strong> Log in and use website normally within session timeout period (should remain logged in)
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Session Timeout:</strong> Leave browser idle for 30+ minutes, then try to access protected page<br>
+                    <strong>Test Case B - Concurrent Sessions:</strong> Log in from multiple browsers/devices<br>
+                    <strong>Test Case C - Session Fixation:</strong> Capture session token and try to reuse after logout<br>
+                    <strong>Test Case D - Session Hijacking:</strong> Use stolen session cookie<br>
+                    <strong>Test Case E - Session Replay:</strong> Reuse old session token
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Session remains active during normal usage</li>
+                        <li>User can access all features</li>
+                        <li>No unexpected logouts</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Session expires after timeout, Redirected to login, Message: 'Your session has expired'<br>
+                    <strong>Test Case B:</strong> Multiple sessions handled correctly, Each session independent, No conflicts<br>
+                    <strong>Test Case C:</strong> Session invalidated after logout, Old token rejected, New login required<br>
+                    <strong>Test Case D:</strong> Stolen session rejected, Security validation enforced, Access denied<br>
+                    <strong>Test Case E:</strong> Old session token rejected, Token expiration enforced, Re-authentication required
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>SEC-006: Sensitive Data Exposure in URLs and Forms</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">SEC-006</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">Sensitive Data Exposure in URLs and Forms</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that sensitive information is not exposed in URLs, form data, or error messages</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com</li>
+                    <li>Open browser Developer Tools (F12)</li>
+                    <li>Go to 'Network' tab</li>
+                    <li>Perform actions from Test Data section</li>
+                    <li>Monitor network requests</li>
+                    <li>Check URLs, headers, response data</li>
+                    <li>Verify sensitive data visibility</li>
+                    <li>Check error messages</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Normal Usage:</strong> Log in, add products, checkout using valid data (sensitive data should be encrypted/secure)
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Password in URL:</strong> Check if password appears in URL parameters during login<br>
+                    <strong>Test Case B - Credit Card in URL:</strong> Check if payment info appears in URL<br>
+                    <strong>Test Case C - Error Message Exposure:</strong> Trigger error and check if database structure exposed<br>
+                    <strong>Test Case D - Response Header Leak:</strong> Check response headers for server version, framework details<br>
+                    <strong>Test Case E - Plain Text Password:</strong> Check if password sent in plain text (should be encrypted)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Passwords encrypted in transmission</li>
+                        <li>Sensitive data not in URLs</li>
+                        <li>Error messages generic</li>
+                        <li>Headers don't expose system info</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Password NOT in URL, Uses POST method, Secure transmission<br>
+                    <strong>Test Case B:</strong> Payment info NOT in URL, Secure handling, Encrypted transmission<br>
+                    <strong>Test Case C:</strong> Error messages generic, No database structure exposed, No SQL queries shown<br>
+                    <strong>Test Case D:</strong> Headers don't expose server version, No framework details, No internal IPs<br>
+                    <strong>Test Case E:</strong> Password encrypted/hashed, HTTPS used, Secure transmission
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>SEC-007: CSRF (Cross-Site Request Forgery) Protection</h2>
+    <table>
+        <tr>
+            <th style="width: 20%;">Field</th>
+            <th style="width: 80%;">Details</th>
+        </tr>
+        <tr>
+            <td><strong>Test Case ID</strong></td>
+            <td class="test-id">SEC-007</td>
+        </tr>
+        <tr>
+            <td><strong>Test Case Title</strong></td>
+            <td class="test-title">CSRF (Cross-Site Request Forgery) Protection</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td class="description">Verify that the application is protected against CSRF attacks by implementing proper tokens</td>
+        </tr>
+        <tr>
+            <td><strong>Test Steps</strong></td>
+            <td>
+                <ol>
+                    <li>Navigate to https://demowebshop.tricentis.com and log in</li>
+                    <li>Open browser Developer Tools (F12)</li>
+                    <li>Navigate to forms from Test Data section</li>
+                    <li>Inspect HTML source for CSRF tokens</li>
+                    <li>Verify token presence and format</li>
+                    <li>Attempt form submission scenarios from Test Data</li>
+                    <li>Observe system response</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Test Data</strong></td>
+            <td class="test-data">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE SCENARIO:</div>
+                    <strong>Valid CSRF Token:</strong> Submit form with valid CSRF token (should succeed)
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE SCENARIOS:</div>
+                    <strong>Test Case A - Missing CSRF Token:</strong> Submit form without CSRF token<br>
+                    <strong>Test Case B - Invalid CSRF Token:</strong> Submit form with modified/expired token<br>
+                    <strong>Test Case C - Token Reuse:</strong> Try to reuse same token for multiple submissions<br>
+                    <strong>Test Case D - Cross-Origin Request:</strong> Attempt form submission from different origin<br>
+                    <strong>Test Case E - Token Mismatch:</strong> Submit form with token from different session
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Expected Result</strong></td>
+            <td class="expected-result">
+                <div class="positive">
+                    <div class="scenario-title">✅ POSITIVE:</div>
+                    <ol>
+                        <li>Forms contain CSRF tokens</li>
+                        <li>Tokens unique per session</li>
+                        <li>Form submission succeeds with valid token</li>
+                        <li>Token validated on server</li>
+                    </ol>
+                </div>
+                <div class="negative">
+                    <div class="scenario-title">❌ NEGATIVE:</div>
+                    <strong>Test Case A:</strong> Form rejected, Error: 'Invalid security token', Submission blocked<br>
+                    <strong>Test Case B:</strong> Invalid token rejected, Error message displayed, Form submission fails<br>
+                    <strong>Test Case C:</strong> Token reuse blocked, Each submission requires new token, Security enforced<br>
+                    <strong>Test Case D:</strong> Cross-origin blocked, Same-origin policy enforced, Request rejected<br>
+                    <strong>Test Case E:</strong> Token mismatch detected, Session validation enforced, Submission rejected
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
