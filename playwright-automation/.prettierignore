@@ -5,6 +5,7 @@ playwright-report/
 allure-results/
 allure-report/
 *.log
+README.md
 ../README.md
 ../api-automation/
 ../manual-tests/
